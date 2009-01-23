@@ -1,0 +1,7 @@
+Build.PL
+lib/Convert/Color/XTerm.pm
+MANIFEST			This list of files
+t/00use.t
+t/01color.t
+Makefile.PL
+META.yml
