@@ -12,7 +12,7 @@ use constant COLOR_SPACE => 'xterm';
 
 use Carp;
 
-our $VERSION = '0.01';
+our $VERSION = '0.02';
 
 =head1 NAME
 
@@ -74,14 +74,24 @@ sub _init_colors
    # XTerm itself pulls these from the X11 database, except for light blue.
    # These color names from xterm's charproc.c
 
-   require Convert::Color::X11;
+   my @colnames;
 
-   my @colnames = (qw(
-      x11:black   x11:red3     x11:green3 x11:yellow3
-      x11:blue2   x11:magenta3 x11:cyan3  x11:gray90
-      x11:gray50  x11:red      x11:green  x11:yellow
-      rgb8:5C5CFF x11:magenta  x11:cyan   x11:white
-   ));
+   if( eval { require Convert::Color::X11; Convert::Color::X11->colors } ) {
+      @colnames = (qw(
+         x11:black   x11:red3     x11:green3 x11:yellow3
+         x11:blue2   x11:magenta3 x11:cyan3  x11:gray90
+         x11:gray50  x11:red      x11:green  x11:yellow
+         rgb8:5C5CFF x11:magenta  x11:cyan   x11:white
+      ));
+   }
+   else {
+      @colnames = (qw(
+         rgb8:000000 rgb8:cd0000 rgb8:00cd00 rgb8:cdcd00
+         rgb8:0000ee rgb8:cd00cd rgb8:00cdcd rgb8:e5e5e5
+         rgb8:7f7f7f rgb8:ff0000 rgb8:00ff00 rgb8:ffff00
+         rgb8:5c5cff rgb8:ff00ff rgb8:00ffff rgb8:ffffff
+      ));
+   }
 
    foreach my $index ( 0 .. $#colnames ) 
    {
