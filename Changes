@@ -1,5 +1,8 @@
 Revision history for Convert-Color-XTerm
 
+0.03    CHANGE:
+         * Remember index of XTerm color, added accessor for it
+
 0.02    BUGFIXES:
          * Try other locations for the X11 rgb.txt file, to account for
            various other systems

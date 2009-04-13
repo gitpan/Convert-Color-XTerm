@@ -12,7 +12,7 @@ use constant COLOR_SPACE => 'xterm';
 
 use Carp;
 
-our $VERSION = '0.02';
+our $VERSION = '0.03';
 
 =head1 NAME
 
@@ -95,7 +95,9 @@ sub _init_colors
 
    foreach my $index ( 0 .. $#colnames ) 
    {
-      $color[$index] = Convert::Color->new( $colnames[$index] )->as_rgb8;
+      my $c_tmp = Convert::Color->new( $colnames[$index] );
+      $color[$index] = __PACKAGE__->SUPER::new( $c_tmp->as_rgb8->rgb8 );
+      $color[$index]->[3] = $index;
    }
 
    # These descriptions and formulae from xterm's 256colres.pl
@@ -106,9 +108,10 @@ sub _init_colors
          foreach my $blue ( 0 .. 5 ) {
             my $index = 16 + ($red*36) + ($green*6) + $blue;
 
-            $color[$index] = Convert::Color::RGB8->new(
+            $color[$index] = __PACKAGE__->SUPER::new(
                map { $_ ? $_*40 + 55 : 0 } ( $red, $green, $blue )
             );
+            $color[$index]->[3] = $index;
          }
       }
    }
@@ -118,7 +121,8 @@ sub _init_colors
       my $index = 232 + $grey;
       my $whiteness = $grey*10 + 8;
 
-      $color[$index] = Convert::Color::RGB8->new( $whiteness, $whiteness, $whiteness );
+      $color[$index] = __PACKAGE__->SUPER::new( $whiteness, $whiteness, $whiteness );
+      $color[$index]->[3] = $index;
    }
 }
 
@@ -149,6 +153,22 @@ sub new
    else {
       croak "usage: Convert::Color::XTerm->new( INDEX )";
    }
+}
+
+=head1 METHODS
+
+=cut
+
+=head2 $index = $color->index
+
+The index of the XTerm color.
+
+=cut
+
+sub index
+{
+   my $self = shift;
+   return $self->[3];
 }
 
 # Keep perl happy; keep Britain tidy

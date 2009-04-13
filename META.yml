@@ -1,6 +1,6 @@
 ---
 name: Convert-Color-XTerm
-version: 0.02
+version: 0.03
 author:
   - 'Paul Evans E<lt>leonerd@leonerd.org.ukE<gt>'
 abstract: 'indexed colors used by F<xterm>'
@@ -14,8 +14,8 @@ build_requires:
 provides:
   Convert::Color::XTerm:
     file: lib/Convert/Color/XTerm.pm
-    version: 0.02
-generated_by: Module::Build version 0.280801
+    version: 0.03
+generated_by: Module::Build version 0.3
 meta-spec:
   url: http://module-build.sourceforge.net/META-spec-v1.2.html
   version: 1.2
