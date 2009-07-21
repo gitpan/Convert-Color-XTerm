@@ -1,6 +1,10 @@
 Revision history for Convert-Color-XTerm
 
-0.03    CHANGE:
+0.04    CHANGES:
+         * Added HTML example
+         * Various small updates to keep CPANTS happy
+
+0.03    CHANGES:
          * Remember index of XTerm color, added accessor for it
 
 0.02    BUGFIXES:

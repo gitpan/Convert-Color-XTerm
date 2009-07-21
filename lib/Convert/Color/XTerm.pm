@@ -6,17 +6,18 @@
 package Convert::Color::XTerm;
 
 use strict;
+use warnings;
 use base qw( Convert::Color::RGB8 );
 
 use constant COLOR_SPACE => 'xterm';
 
 use Carp;
 
-our $VERSION = '0.03';
+our $VERSION = '0.04';
 
 =head1 NAME
 
-C<Convert::Color::XTerm> - indexed colors used by F<xterm>
+C<Convert::Color::XTerm> - indexed colors used by XTerm
 
 =head1 SYNOPSIS
 
@@ -188,4 +189,4 @@ L<Convert::Color> - color space conversions
 
 =head1 AUTHOR
 
-Paul Evans E<lt>leonerd@leonerd.org.ukE<gt>
+Paul Evans <leonerd@leonerd.org.uk>
