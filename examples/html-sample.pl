@@ -36,23 +36,6 @@ GetOptions(
 
 my @XTerm = map { Convert::Color->new( "xterm:$_" ) } 0 .. 255;
 
-sub maximize (&@)
-{
-   my $code = shift;
-
-   return undef unless @_;
-
-   local $_;
-
-   my $maximal = shift; my $value = $code->( $_ = $maximal );
-   foreach ( @_ ) {
-      my $v = $code->( $_ );
-      if( $v < $value ) { $value = $v; $maximal = $_ }
-   }
-
-   return $maximal;
-}
-
 while( my $colname = shift @ARGV ) {
    if( $colname eq "x11:*" ) {
       require Convert::Color::X11;
@@ -71,7 +54,7 @@ while( my $colname = shift @ARGV ) {
       span( sprintf('%03d',$g), Convert::Color::RGB8->new( 0, $g, 0 ) ),
       span( sprintf('%03d',$b), Convert::Color::RGB8->new( 0, 0, $b ) );
 
-   my $best_xterm = maximize { $_->dst_rgb8( $col ) } @XTerm;
+   my $best_xterm = $c_rgb8->as_xterm;
    my $xterm = span( $best_xterm->index, $best_xterm );
 
    push @COL, [ $best_xterm->index, <<"EOF" ];

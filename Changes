@@ -1,5 +1,8 @@
 Revision history for Convert-Color-XTerm
 
+0.05    CHANGES:
+         * Updated for Convert::Color 0.06 - allows palette search
+
 0.04    CHANGES:
          * Added HTML example
          * Various small updates to keep CPANTS happy

@@ -1,7 +1,7 @@
 #  You may distribute under the terms of either the GNU General Public License
 #  or the Artistic License (the same terms as Perl itself)
 #
-#  (C) Paul Evans, 2009 -- leonerd@leonerd.org.uk
+#  (C) Paul Evans, 2009,2010 -- leonerd@leonerd.org.uk
 
 package Convert::Color::XTerm;
 
@@ -9,11 +9,11 @@ use strict;
 use warnings;
 use base qw( Convert::Color::RGB8 );
 
-use constant COLOR_SPACE => 'xterm';
+__PACKAGE__->register_color_space( 'xterm' );
 
 use Carp;
 
-our $VERSION = '0.04';
+our $VERSION = '0.05';
 
 =head1 NAME
 
@@ -126,6 +126,13 @@ sub _init_colors
       $color[$index]->[3] = $index;
    }
 }
+
+__PACKAGE__->register_palette(
+   enumerate_once => sub {
+      @color or _init_colors;
+      @color
+   },
+);
 
 =head1 CONSTRUCTOR
 

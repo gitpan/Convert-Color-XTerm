@@ -1,8 +1,9 @@
 #!/usr/bin/perl
 
 use Convert::Color::XTerm;
+use Convert::Color::RGB;
 
-use Test::More tests => 8;
+use Test::More tests => 9;
 
 my $black = Convert::Color::XTerm->new( 0 );
 
@@ -19,3 +20,7 @@ is( $green->green, 205, 'green green' );
 is( $green->blue,    0, 'green blue' );
 
 is( $green->index, 2, 'green index' );
+
+my $white = Convert::Color::RGB->new( 1.0, 1.0, 1.0 )->as_xterm;
+
+is( $white->index, 15, 'white index' );
